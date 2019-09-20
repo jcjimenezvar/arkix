@@ -4,7 +4,7 @@ const vars = {
   nodeEnv: 'NODE_ENV',
   port: 'PORT',
   rootPath: 'ROOT_PATH',
-  saltrounds: 10  
+  saltrounds: 'SALTROUNDS',
 }
 
 import { ConfigService } from './configService'
@@ -25,7 +25,8 @@ describe('ConfigService', () => {
 
   test('load NO da error de validación si estan configuradas las variables requeridas', () => {
     process.env[vars.nodeEnv] = 'testing'
-    process.env[vars.rootPath] = 'some-path'    
+    process.env[vars.rootPath] = 'some-path'
+    process.env[vars.saltrounds] = '0'    
 
     const err = config.load()
     expect(err).toBeFalsy()
