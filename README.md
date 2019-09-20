@@ -19,4 +19,4 @@ Esta API contiene documentacion e interface Swagger de funcionamiento la cual pu
 
 # Heroku
 
-Se tiene desplegada la información en el servidor Heroku url 
+Se tiene desplegada la información en el servidor Heroku url https://arkix.herokuapp.com/api-docs/
