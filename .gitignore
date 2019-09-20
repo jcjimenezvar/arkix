@@ -1,0 +1,16 @@
+# TypeScript output folder
+dist
+
+#Testing Coverage folder
+test/coverage
+test/tslint-html-report
+
+# Dependency directories
+node_modules/
+
+# dotenv environment variables file
+.env
+
+# local logs
+npm-debug.log
+.DS_Store

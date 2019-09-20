@@ -1,0 +1,265 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Arkix Service API"
+  },
+  "paths": {
+    "/arkix": {
+      "put": {
+        "tags": [
+          "Arkix"
+        ],
+        "summary": "Valida si el email enviado existe, en caso contrario inserta la información",
+        "operationId": "PutUsers",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InsertValues"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informacíon registrada correctamente",
+            "schema": {
+              "$ref": "#/definitions/CorrectInsert"
+            }
+          },
+          "409": {
+            "description": "El email enviado ya esta registrado",
+            "schema": {
+              "$ref": "#/definitions/EmailRegistrado"
+            }
+          },
+          "422": {
+            "description": "El request tiene datos invalidos",
+            "schema": {
+              "$ref": "#/definitions/InvalidRequest"
+            }
+          }
+        }
+      },      
+      "post": {
+        "tags": [
+          "Arkix"
+        ],
+        "summary": "Valida el token enviado y retorna la lista de valores de jsonplaceholder",
+        "operationId": "GetToken",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RequestPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token valido, lista de datos obtenida",
+            "schema": {
+              "$ref": "#/definitions/ResponsePost"
+            }
+          },
+          "409": {
+            "description": "Token invalido o vencido",
+            "schema": {
+              "$ref": "#/definitions/TokenInvalido"
+            }
+          },
+          "422": {
+            "description": "El request tiene datos invalidos",
+            "schema": {
+              "$ref": "#/definitions/InvalidRequest"
+            }
+          }
+        }
+      }
+    },
+    "/arkix/getToken":{
+      "post": {
+        "tags": [
+          "Arkix"
+        ],
+        "summary": "Valida si el usuario esta registrado y retorna el token JWT",
+        "operationId": "GetToken",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RequestGet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token generado correctamente",
+            "schema": {
+              "$ref": "#/definitions/ResponseGet"
+            }
+          },
+          "409": {
+            "description": "El usuario no esta registrado",
+            "schema": {
+              "$ref": "#/definitions/UsuarioNoRegistrado"
+            }
+          },
+          "422": {
+            "description": "El request tiene datos invalidos",
+            "schema": {
+              "$ref": "#/definitions/InvalidRequest"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InsertValues": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "Usuario que se desea insertar.",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email que se desea insertar.",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password que se desea insertar.",
+          "type": "string"
+        }
+      }
+    },
+    "CorrectInsert": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "InvalidRequest": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EmailRegistrado": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RequestGet": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "Usuario que se desea insertar.",
+          "type": "string"
+        }
+      }
+    },
+    "ResponseGet":{
+      "type": "string"
+    },
+    "UsuarioNoRegistrado": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RequestPost": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "description": "Token generado.",
+          "type": "string"
+        }
+      }
+    },
+    "ResponsePost":{
+      "": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "TokenInvalido": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

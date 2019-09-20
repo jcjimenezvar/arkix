@@ -1,0 +1,7 @@
+{
+  "{src,test}/**/*.{ts,js,json}": [
+    "tslint -c tslint.json -p tsconfig.json --fix",
+    "./node_modules/.bin/prettier --single-quote --write",
+    "git add"
+  ]
+}
